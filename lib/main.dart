@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:weathering/pages/homepage.dart';
+import 'pages/homePage.dart';
 
 void main() {
-  runApp(const weatheringApp());
+  runApp( weatheringApp());
 }
 
 class weatheringApp extends StatelessWidget {
   const weatheringApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'WeatherApp',
-      home: homepage()
+    return MaterialApp(title: 'WeatherApp', home: homePage()
     );
   }
 }
-
