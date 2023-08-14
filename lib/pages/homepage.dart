@@ -51,7 +51,6 @@ class _homePageState extends State<homePage> {
     }
   }
 
-  bool isLoading = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,18 +62,22 @@ class _homePageState extends State<homePage> {
             ),
             centerTitle: true,
             backgroundColor: Color.fromARGB(255, 137, 207, 240)),
-        body: Center(
-          child: ListView.builder(
-            itemCount: weatherList.length,
-            itemBuilder: (context, index) {
-              weatherModel weather = weatherList[index];
-              return ListTile(
-                title: Text(cityList[index]),
-                subtitle: Text(weather.description),
-                trailing: Text("${weather.temp.toStringAsFixed(1)}C"),
-              );
-            },
+        body: weatherList.isEmpty? 
+        Center(
+          child: CircularProgressIndicator(
           ),
-        ));
+        ):
+          ListView.builder(
+              itemCount: weatherList.length,
+              itemBuilder: (context, index) {
+                weatherModel weather = weatherList[index];
+                return ListTile(
+                  title: Text(cityList[index]),
+                  subtitle: Text(weather.description),
+                  trailing: Text("${weather.temp.toStringAsFixed(1)}C"),
+                );
+              },
+            )
+            );
   }
 }
