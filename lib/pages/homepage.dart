@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:weathering/models/weatherModel.dart';
 import 'package:http/http.dart' as http;
@@ -12,11 +14,15 @@ class _homePageState extends State<homePage> {
   List<weatherModel> weatherList = [];
   List<String> cityList = [
     'Jakarta',
+    'Seoul',
     'Tokyo',
-    'London',
     'Mecca',
+    'Berlin',
+    'London',
+    'Paris',
+    'Moscow',
     'New York',
-    'Berlin'
+    'Canberra'
   ];
   @override
   void initState() {
@@ -32,7 +38,7 @@ class _homePageState extends State<homePage> {
       });
     }
   }
-  
+
   Future<weatherModel> getCurrentWeather(String city) async {
     String apiKey = "c801a80b0ab520b3260db6bed5ba6472";
     var url =
@@ -44,21 +50,31 @@ class _homePageState extends State<homePage> {
       throw Exception("Failed to fetch weather data");
     }
   }
+
+  bool isLoading = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+            title: Text(
+              "Weather App ☀️",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            centerTitle: true,
+            backgroundColor: Color.fromARGB(255, 137, 207, 240)),
         body: Center(
-      child: ListView.builder(
-        itemCount: weatherList.length,
-        itemBuilder: (context, index) {
-          weatherModel weather = weatherList[index];
-          return ListTile(
-            title: Text(cityList[index]),
-            subtitle: Text(weather.description),
-            trailing: Text("${weather.temp.toStringAsFixed(1)}C"),
-          );
-        },
-      ),
-    ));
+          child: ListView.builder(
+            itemCount: weatherList.length,
+            itemBuilder: (context, index) {
+              weatherModel weather = weatherList[index];
+              return ListTile(
+                title: Text(cityList[index]),
+                subtitle: Text(weather.description),
+                trailing: Text("${weather.temp.toStringAsFixed(1)}C"),
+              );
+            },
+          ),
+        ));
   }
 }

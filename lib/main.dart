@@ -10,7 +10,9 @@ class weatheringApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'WeatherApp', home: homePage()
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'WeatherApp', home: homePage()
     );
   }
 }
