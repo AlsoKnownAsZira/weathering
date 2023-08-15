@@ -5,6 +5,8 @@ import 'package:weathering/models/weatherModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:weathering/widgets/openWeather.dart';
+
 class homePage extends StatefulWidget {
   @override
   _homePageState createState() => _homePageState();
@@ -62,22 +64,21 @@ class _homePageState extends State<homePage> {
             ),
             centerTitle: true,
             backgroundColor: Color.fromARGB(255, 137, 207, 240)),
-        body: weatherList.isEmpty? 
-        Center(
-          child: CircularProgressIndicator(
-          ),
-        ):
-          ListView.builder(
-              itemCount: weatherList.length,
-              itemBuilder: (context, index) {
-                weatherModel weather = weatherList[index];
-                return ListTile(
-                  title: Text(cityList[index]),
-                  subtitle: Text(weather.description),
-                  trailing: Text("${weather.temp.toStringAsFixed(1)}C"),
-                );
-              },
-            )
-            );
+        body: weatherList.isEmpty
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView.builder(
+                itemCount: weatherList.length,
+                itemBuilder: (context, index) {
+                  weatherModel weather = weatherList[index];
+                  return ListTile(
+                    title: Text(cityList[index]),
+                    subtitle: Text(weather.description),
+                    trailing: Text("${weather.temp.toStringAsFixed(1)}C"),
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => openWeather(weather: weather, city: cityList[index]),))
+                  );
+                },
+              ));
   }
 }
