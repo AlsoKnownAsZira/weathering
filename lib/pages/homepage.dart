@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:weathering/models/weatherModel.dart';
@@ -67,19 +68,34 @@ class _homePageState extends State<homePage> {
             centerTitle: true,
             backgroundColor: Color.fromARGB(255, 137, 207, 240)),
         body: weatherList.isEmpty
-            ? Center(
-                child: CircularProgressIndicator(),
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      width: 200,
+                      height: 200,
+                      child: CircularProgressIndicator()),
+                      SizedBox(height: 10,),
+                      Center(child: Text("Fetching data, please check your internet connection")),
+                ],
               )
             : ListView.builder(
                 itemCount: weatherList.length,
                 itemBuilder: (context, index) {
                   weatherModel weather = weatherList[index];
                   return ListTile(
-                    title: Text(cityList[index]),
-                    subtitle: Text(weather.description),
-                    trailing: Text("${weather.temp.toStringAsFixed(1)}C"),
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => openWeather(weather: weather, city: cityList[index],index: index),))
-                  );
+                      title: Text(cityList[index]),
+                      subtitle: Text(weather.description),
+                      trailing: Text("${weather.temp.toStringAsFixed(1)}°C"),
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => openWeather(
+                                weather: weather,
+                                city: cityList[index],
+                                index: index),
+                          )));
                 },
               ));
   }
