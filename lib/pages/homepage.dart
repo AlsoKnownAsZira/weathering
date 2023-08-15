@@ -26,6 +26,8 @@ class _homePageState extends State<homePage> {
     'New York',
     'Canberra'
   ];
+
+  //future builder alternative
   @override
   void initState() {
     super.initState();
@@ -76,7 +78,7 @@ class _homePageState extends State<homePage> {
                     title: Text(cityList[index]),
                     subtitle: Text(weather.description),
                     trailing: Text("${weather.temp.toStringAsFixed(1)}C"),
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => openWeather(weather: weather, city: cityList[index]),))
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => openWeather(weather: weather, city: cityList[index],index: index),))
                   );
                 },
               ));
