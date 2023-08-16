@@ -186,7 +186,7 @@ class openWeather extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 0,horizontal: 10),
-              child: Flexible(child: Text(facts[index], style: TextStyle(fontSize: 15),)),
+            child: Text(facts[index], style: TextStyle(fontSize: 15),),
             )
           ],
         ),
