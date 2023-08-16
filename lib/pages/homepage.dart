@@ -67,6 +67,50 @@ class _homePageState extends State<homePage> {
             ),
             centerTitle: true,
             backgroundColor: Color.fromARGB(255, 137, 207, 240)),
+        drawer: Drawer(
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(20),
+                alignment: Alignment.bottomLeft,
+                width: double.infinity,
+                height: 125,
+                color: Color.fromARGB(255, 137, 207, 240),
+                child: const Text(
+                  "Weathering",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Expanded(
+                  child: ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.question_mark_sharp),
+                    title: Text("More info about weather data"),
+                    trailing: Icon(Icons.arrow_forward_ios_sharp),
+                    onTap: () => sbs(0),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.link),
+                    title: Text("Sources"),
+                    trailing: Icon(Icons.arrow_forward_ios_sharp),
+                    onTap: () => sbs(1),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.info_outline),
+                    title: Text("About"),
+                    trailing: Icon(Icons.arrow_forward_ios_sharp),
+                    onTap: () => sbs(2),
+                  )
+                ],
+              ))
+            ],
+          ),
+        ),
         body: weatherList.isEmpty
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -76,8 +120,12 @@ class _homePageState extends State<homePage> {
                       width: 200,
                       height: 200,
                       child: CircularProgressIndicator()),
-                      SizedBox(height: 10,),
-                      Center(child: Text("Fetching data, please check your internet connection")),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                      child: Text(
+                          "Fetching data, please check your internet connection")),
                 ],
               )
             : ListView.builder(
@@ -98,5 +146,24 @@ class _homePageState extends State<homePage> {
                           )));
                 },
               ));
+  }
+
+  List<String> sbsList = [
+    "According to openweathermap.org the displayed data has a precision of 1 hour accuracy",
+    "Sources:\nAPI: https://openweathermap.org/\nFun Facts: http://www.enjoytravel.com,https://www.wunderlustlondon.co.uk/,https://theplanetd.com/\nImages: https://images.unsplash.com/ ",
+    "Hi, this simple weather app is created by bril/zira. Practicing HTTP Request is the main reason why I create this app. If you stumble across any bugs or if you have any suggestions, feel free to contact me on email: brilsatsecond@gmail.com\n for the source code, please visit https://github.com/AlsoKnownAsZira/weathering"
+  ];
+  sbs(int index) {
+    return showModalBottomSheet(
+      context: context,
+      isDismissible: true,
+      builder: (context) => SizedBox(
+        height: 175,
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Text(sbsList[index],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+        ),
+      ),
+    );
   }
 }
