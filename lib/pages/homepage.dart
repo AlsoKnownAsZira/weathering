@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:weathering/models/weatherModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:weathering/widgets/openWeather.dart';
 
 class homePage extends StatefulWidget {
@@ -150,8 +147,8 @@ class _homePageState extends State<homePage> {
 
   List<String> sbsList = [
     "According to openweathermap.org the displayed data has a precision of 1 hour accuracy",
-    "Sources:\nAPI: https://openweathermap.org/\nFun Facts: http://www.enjoytravel.com,https://www.wunderlustlondon.co.uk/,https://theplanetd.com/\nImages: https://images.unsplash.com/ ",
-    "Hi, this simple weather app is created by bril/zira. Practicing HTTP Request is the main reason why I create this app. If you stumble across any bugs or if you have any suggestions, feel free to contact me on email: brilsatsecond@gmail.com\n for the source code, please visit https://github.com/AlsoKnownAsZira/weathering"
+    "Sources:\nAPI: https://openweathermap.org/\nFun Facts: http://www.enjoytravel.com\nhttps://www.wunderlustlondon.co.uk/\nhttps://theplanetd.com/\nImages: https://images.unsplash.com/ ",
+    "Hi, this simple weather app is created by bril/zira. Practicing HTTP Request is the main reason why I create this app. If you stumble across any bugs or if you have any suggestions, feel free to contact me on email: brilsatsecond@gmail.com\n for the source code, please visit the repo \nhttps://github.com/AlsoKnownAsZira/weathering"
   ];
   sbs(int index) {
     return showModalBottomSheet(
