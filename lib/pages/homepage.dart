@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:weathering/models/weatherModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:weathering/pages/searchPage.dart';
 import 'dart:convert';
 import 'package:weathering/widgets/openWeather.dart';
 
@@ -64,7 +65,15 @@ class _homePageState extends State<homePage> {
             ),
             centerTitle: true,
             actions: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.search))
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => searchPage(),
+                        ));
+                  },
+                  icon: Icon(Icons.search))
             ],
             backgroundColor: Color.fromARGB(255, 137, 207, 240)),
         drawer: Drawer(
@@ -161,7 +170,10 @@ class _homePageState extends State<homePage> {
         height: 175,
         child: Padding(
           padding: EdgeInsets.all(10),
-          child: Text(sbsList[index],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+          child: Text(
+            sbsList[index],
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          ),
         ),
       ),
     );
