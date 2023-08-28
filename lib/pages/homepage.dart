@@ -63,6 +63,9 @@ class _homePageState extends State<homePage> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
+            actions: [
+              IconButton(onPressed: (){}, icon: Icon(Icons.search))
+            ],
             backgroundColor: Color.fromARGB(255, 137, 207, 240)),
         drawer: Drawer(
           child: Column(
