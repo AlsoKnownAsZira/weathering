@@ -4,10 +4,21 @@ import 'package:weathering/pages/detailSearch.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-class searchPage extends StatelessWidget {
+
+class searchPage extends StatefulWidget {
   searchPage({super.key});
+
+  @override
+  State<searchPage> createState() => _searchPageState();
+}
+
+class _searchPageState extends State<searchPage> {
   TextEditingController weatherC = TextEditingController();
-Future<weatherModel> getCurrentWeather(String city) async {
+
+  String status =
+      "Enter the city name on the search bar above";
+
+  Future<weatherModel> getCurrentWeather(String city) async {
     String apiKey = "c801a80b0ab520b3260db6bed5ba6472";
     var url =
         "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric";
@@ -15,9 +26,14 @@ Future<weatherModel> getCurrentWeather(String city) async {
     if (response.statusCode == 200) {
       return weatherModel.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception("Failed to fetch weather data");
+      setState(() {
+        status = "Failed to fetch weather data, city not found";
+      });
+
+      throw Exception("Failed to fetch weather data, city not found");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,15 +53,18 @@ Future<weatherModel> getCurrentWeather(String city) async {
                   hintText: 'Search...', border: InputBorder.none),
               keyboardType: TextInputType.text,
               onSubmitted: (value) async {
-               if(weatherC.text.isNotEmpty){
-                weatherModel weather = await getCurrentWeather(weatherC.text);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => detailSearch(city: weatherC.text,weather: weather)
-                    ));
-               }
-                
+                if (weatherC.text.isNotEmpty) {
+                  weatherModel weather = await getCurrentWeather(weatherC.text);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => detailSearch(
+                              city: weatherC.text, weather: weather)));
+                  setState(() {
+                    status =
+                        "Enter the city name on the search bar above";
+                  });
+                }
               },
             ),
           ),
@@ -55,7 +74,7 @@ Future<weatherModel> getCurrentWeather(String city) async {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Text(
-            "Enter the city name on the search bar above, keep in mind only major cities weather data are available",
+            status,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),

@@ -158,9 +158,9 @@ class _homePageState extends State<homePage> {
   }
 
   List<String> sbsList = [
-    "According to openweathermap.org the displayed data has a precision of 1 hour accuracy",
+    "According to openweathermap.org the displayed data has a precision of 1 hour accuracy.\nIf the City's image(not on searched city) Won't load, please recheck your internet connection.",
     "Sources:\nAPI: https://openweathermap.org/\nFun Facts: http://www.enjoytravel.com\nhttps://www.wunderlustlondon.co.uk/\nhttps://theplanetd.com/\nImages: https://images.unsplash.com/ ",
-    "Hi, this simple weather app is created by bril/zira. Practicing HTTP Request is the main reason why I create this app. If you stumble across any bugs or if you have any suggestions, feel free to contact me on email: brilsatsecond@gmail.com\n for the source code, please visit the repo \nhttps://github.com/AlsoKnownAsZira/weathering"
+    "Practicing HTTP Request is the main reason why I create this app. If you stumble across any bugs or if you have any suggestions or if you just wanted the source code, feel free to contact me.\nThanks for testing, have a nice day!"
   ];
   sbs(int index) {
     return showModalBottomSheet(
